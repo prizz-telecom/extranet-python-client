@@ -56,6 +56,7 @@ docs/Offer.md
 docs/OfferContext.md
 docs/OfferContextShortened.md
 docs/OfferItem.md
+docs/OperationalStatus.md
 docs/Operator.md
 docs/OperatorTicket.md
 docs/PriceList.md
@@ -156,6 +157,7 @@ prizz_extranet/models/offer.py
 prizz_extranet/models/offer_context.py
 prizz_extranet/models/offer_context_shortened.py
 prizz_extranet/models/offer_item.py
+prizz_extranet/models/operational_status.py
 prizz_extranet/models/operator.py
 prizz_extranet/models/operator_ticket.py
 prizz_extranet/models/price_list.py
@@ -203,4 +205,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_operational_status.py
 tox.ini

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from prizz_extranet.models.eligibility_price_list_item import EligibilityPriceListItem
 from typing import Optional, Set
@@ -25,20 +25,20 @@ from typing_extensions import Self
 
 class EligibilityResultPriceListItemsGroups(BaseModel):
     """
-    EligibilityResultPriceListItemsGroups
+    Price list items grouped by product group
     """ # noqa: E501
-    main: Optional[List[EligibilityPriceListItem]] = None
-    bandwidth: Optional[List[EligibilityPriceListItem]] = None
-    commitment: Optional[List[EligibilityPriceListItem]] = None
-    grt: Optional[List[EligibilityPriceListItem]] = None
-    nrc: Optional[List[EligibilityPriceListItem]] = None
-    distance: Optional[List[EligibilityPriceListItem]] = None
-    fiber_count: Optional[List[EligibilityPriceListItem]] = None
-    extremity_site_a: Optional[List[EligibilityPriceListItem]] = None
-    extremity_site_b: Optional[List[EligibilityPriceListItem]] = None
-    maintenance: Optional[List[EligibilityPriceListItem]] = None
-    subnet: Optional[List[EligibilityPriceListItem]] = None
-    national: Optional[List[EligibilityPriceListItem]] = None
+    main: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Main product group, contains on item with base price")
+    bandwidth: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Bandwidth product group, list available bandwidths")
+    commitment: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Commitment product group, list available commitments")
+    grt: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="GRT product group, list available GRT options")
+    nrc: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="NRC product group, contain one item in most cases")
+    distance: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in FON offers")
+    fiber_count: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in FON offers")
+    extremity_site_a: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in FON offers, describes the extremity A")
+    extremity_site_b: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in FON offers, describes the extremity B")
+    maintenance: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in FON offers")
+    subnet: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in L3 offers, list available subnets sizes")
+    national: Optional[List[EligibilityPriceListItem]] = Field(default=None, description="Used in L2 offers, list available national options")
     __properties: ClassVar[List[str]] = ["main", "bandwidth", "commitment", "grt", "nrc", "distance", "fiber_count", "extremity_site_a", "extremity_site_b", "maintenance", "subnet", "national"]
 
     model_config = ConfigDict(

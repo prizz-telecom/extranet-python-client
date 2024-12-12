@@ -47,6 +47,7 @@ Method | HTTP request | Description
 [**get_service**](DefaultApi.md#get_service) | **GET** /external-api/v2/services/{id} | Service
 [**get_service_contract**](DefaultApi.md#get_service_contract) | **GET** /external-api/v2/service_contracts/{id} | Service Contract
 [**get_service_contract_by_name**](DefaultApi.md#get_service_contract_by_name) | **GET** /external-api/v2/service_contracts_by_name/{service_name} | Service Contract by name
+[**get_service_contract_operational_status_by_name**](DefaultApi.md#get_service_contract_operational_status_by_name) | **GET** /external-api/v2/service_contracts_by_name/{service_name}/operational_status | Get service contract operational status
 [**get_service_contracts**](DefaultApi.md#get_service_contracts) | **GET** /external-api/v2/service_contracts | Service Contracts
 [**get_services**](DefaultApi.md#get_services) | **GET** /external-api/v2/services | Services
 [**get_ticket**](DefaultApi.md#get_ticket) | **GET** /external-api/v2/exploitation/operator/{id}/tickets/{ref} | Exploitation Ticket
@@ -110,7 +111,7 @@ configuration = prizz_extranet.Configuration(
 with prizz_extranet.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = prizz_extranet.DefaultApi(api_client)
-    id = 56 # int | service pack identifier
+    id = 56 # int | service contract identifier
     add_service_contract_comment = prizz_extranet.AddServiceContractComment() # AddServiceContractComment |  (optional)
 
     try:
@@ -129,7 +130,7 @@ with prizz_extranet.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| service pack identifier | 
+ **id** | **int**| service contract identifier | 
  **add_service_contract_comment** | [**AddServiceContractComment**](AddServiceContractComment.md)|  | [optional] 
 
 ### Return type
@@ -3910,6 +3911,94 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_service_contract_operational_status_by_name**
+> OperationalStatus get_service_contract_operational_status_by_name(service_name)
+
+Get service contract operational status
+
+Le statut présenté est un état consolidé du résultat de plusieurs tests et de mesures en différents points du réseau effectué périodiquement. Les valeurs de status disponibles sont : - `ok` : votre service est produit normalement - `warning` : le service laisse penser qu'il nécessite une attention particulière (exemple: uptime faible) - `critical` : le service est interrompu - `unknown` : nous n'avons pas pu remonter l'état du service  L'attribut lastCheck vous indique quand le service a été testé pour la dernière fois 
+
+### Example
+
+* Api Key Authentication (tokenAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import prizz_extranet
+from prizz_extranet.models.operational_status import OperationalStatus
+from prizz_extranet.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://my.tests.prizz-telecom.fr
+# See configuration.py for a list of all supported configuration parameters.
+configuration = prizz_extranet.Configuration(
+    host = "https://my.tests.prizz-telecom.fr"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: tokenAuth
+configuration.api_key['tokenAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['tokenAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = prizz_extranet.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with prizz_extranet.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = prizz_extranet.DefaultApi(api_client)
+    service_name = 'service_name_example' # str | identifiant du contrat de services
+
+    try:
+        # Get service contract operational status
+        api_response = api_instance.get_service_contract_operational_status_by_name(service_name)
+        print("The response of DefaultApi->get_service_contract_operational_status_by_name:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_service_contract_operational_status_by_name: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **service_name** | **str**| identifiant du contrat de services | 
+
+### Return type
+
+[**OperationalStatus**](OperationalStatus.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | état opérationel |  -  |
+**401** | need authentication |  -  |
+**403** | forbidden or operationnal status not shared  Le statut opérationnel n&#39;est pas partagé pour ce contrat de service. Ouverture après un RDV technique pour échanger sur les procédures d&#39;exploitation. |  -  |
+**404** | resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_service_contracts**
 > GetServiceContracts200Response get_service_contracts(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_status=sort_status, status=status, legal_entity_id=legal_entity_id)
 
@@ -5055,7 +5144,7 @@ configuration = prizz_extranet.Configuration(
 with prizz_extranet.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = prizz_extranet.DefaultApi(api_client)
-    id = 56 # int | service pack identifier
+    id = 56 # int | service contract identifier
     set_service_contract_vlan_request = prizz_extranet.SetServiceContractVlanRequest() # SetServiceContractVlanRequest | 
 
     try:
@@ -5074,7 +5163,7 @@ with prizz_extranet.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| service pack identifier | 
+ **id** | **int**| service contract identifier | 
  **set_service_contract_vlan_request** | [**SetServiceContractVlanRequest**](SetServiceContractVlanRequest.md)|  | 
 
 ### Return type

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,12 +26,13 @@ class EligibilityResultCombination(BaseModel):
     """
     EligibilityResultCombination
     """ # noqa: E501
-    combination_id: Optional[StrictStr] = Field(default=None, alias="combinationId")
-    total: Optional[StrictInt] = None
-    total_without_nrc: Optional[StrictInt] = Field(default=None, alias="totalWithoutNrc")
-    nrc: Optional[StrictInt] = None
-    attributes: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["combinationId", "total", "totalWithoutNrc", "nrc", "attributes"]
+    combination_id: Optional[StrictStr] = Field(default=None, description="Combination id, a unique identifier for the combination", alias="combinationId")
+    total: Optional[StrictInt] = Field(default=None, description="Total cost in €x100")
+    total_without_nrc: Optional[StrictInt] = Field(default=None, description="Total recuring cost in €x100", alias="totalWithoutNrc")
+    nrc: Optional[StrictInt] = Field(default=None, description="Total non recuring cost in €x100")
+    attributes: Optional[Dict[str, Any]] = Field(default=None, description="Attributes of the combination")
+    nrc_to_estimate: Optional[StrictBool] = Field(default=None, description="If offer contains a NRC to estimate", alias="nrcToEstimate")
+    __properties: ClassVar[List[str]] = ["combinationId", "total", "totalWithoutNrc", "nrc", "attributes", "nrcToEstimate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,7 +89,8 @@ class EligibilityResultCombination(BaseModel):
             "total": obj.get("total"),
             "totalWithoutNrc": obj.get("totalWithoutNrc"),
             "nrc": obj.get("nrc"),
-            "attributes": obj.get("attributes")
+            "attributes": obj.get("attributes"),
+            "nrcToEstimate": obj.get("nrcToEstimate")
         })
         return _obj
 

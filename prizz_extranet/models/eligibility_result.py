@@ -28,32 +28,33 @@ class EligibilityResult(BaseModel):
     """
     EligibilityResult
     """ # noqa: E501
-    code: Optional[StrictStr] = None
-    tech: Optional[StrictInt] = None
-    delivery: Optional[StrictInt] = None
-    grt_min: Optional[StrictInt] = Field(default=None, alias="grtMin")
-    grt_max: Optional[StrictInt] = Field(default=None, alias="grtMax")
-    grt_non_working_hours_option_available: Optional[StrictBool] = Field(default=None, alias="grtNonWorkingHoursOptionAvailable")
-    grt_non_working_hours_option_mandatory: Optional[StrictBool] = Field(default=None, alias="grtNonWorkingHoursOptionMandatory")
-    nrc_min: Optional[StrictInt] = Field(default=None, alias="nrcMin")
-    nrc_max: Optional[StrictInt] = Field(default=None, alias="nrcMax")
-    commitment_min: Optional[StrictInt] = Field(default=None, alias="commitmentMin")
-    commitment_max: Optional[StrictInt] = Field(default=None, alias="commitmentMax")
-    upload_min: Optional[StrictInt] = Field(default=None, alias="uploadMin")
-    upload_max: Optional[StrictInt] = Field(default=None, alias="uploadMax")
-    download_min: Optional[StrictInt] = Field(default=None, alias="downloadMin")
-    download_max: Optional[StrictInt] = Field(default=None, alias="downloadMax")
-    guaranteed_upload_min: Optional[StrictInt] = Field(default=None, alias="guaranteedUploadMin")
-    guaranteed_upload_max: Optional[StrictInt] = Field(default=None, alias="guaranteedUploadMax")
-    guaranteedd_download_min: Optional[StrictInt] = Field(default=None, alias="guaranteeddDownloadMin")
-    guaranteedd_download_max: Optional[StrictInt] = Field(default=None, alias="guaranteeddDownloadMax")
-    rc_min: Optional[StrictInt] = Field(default=None, alias="rcMin")
-    rc_max: Optional[StrictInt] = Field(default=None, alias="rcMax")
+    code: Optional[StrictStr] = Field(default=None, description="Offer name like 'L2 Premium'")
+    tech: Optional[StrictInt] = Field(default=None, description="Technology id")
+    delivery: Optional[StrictInt] = Field(default=None, description="Delivery time in days")
+    grt_min: Optional[StrictInt] = Field(default=None, description="Minimum guaranteed resolution time in hours", alias="grtMin")
+    grt_max: Optional[StrictInt] = Field(default=None, description="Maximum guaranteed resolution time in hours", alias="grtMax")
+    grt_non_working_hours_option_available: Optional[StrictBool] = Field(default=None, description="If the GRT option is available", alias="grtNonWorkingHoursOptionAvailable")
+    grt_non_working_hours_option_mandatory: Optional[StrictBool] = Field(default=None, description="If the GRT option is mandatory", alias="grtNonWorkingHoursOptionMandatory")
+    nrc_min: Optional[StrictInt] = Field(default=None, description="Minimum non reccuring cost in €x100", alias="nrcMin")
+    nrc_max: Optional[StrictInt] = Field(default=None, description="Maximum non reccuring cost in €x100", alias="nrcMax")
+    commitment_min: Optional[StrictInt] = Field(default=None, description="Minimum commitment in months", alias="commitmentMin")
+    commitment_max: Optional[StrictInt] = Field(default=None, description="Maximum commitment in months", alias="commitmentMax")
+    upload_min: Optional[StrictInt] = Field(default=None, description="Minimum upload speed in mbps", alias="uploadMin")
+    upload_max: Optional[StrictInt] = Field(default=None, description="Maximum upload speed in mbps", alias="uploadMax")
+    download_min: Optional[StrictInt] = Field(default=None, description="Minimum download speed in mbps", alias="downloadMin")
+    download_max: Optional[StrictInt] = Field(default=None, description="Maximum download speed in mbps", alias="downloadMax")
+    guaranteed_upload_min: Optional[StrictInt] = Field(default=None, description="Minimum guaranteed upload speed in mbps", alias="guaranteedUploadMin")
+    guaranteed_upload_max: Optional[StrictInt] = Field(default=None, description="Maximum guaranteed upload speed in mbps", alias="guaranteedUploadMax")
+    guaranteedd_download_min: Optional[StrictInt] = Field(default=None, description="Minimum guaranteed download speed in mbps", alias="guaranteeddDownloadMin")
+    guaranteedd_download_max: Optional[StrictInt] = Field(default=None, description="Maximum guaranteed download speed in mbps", alias="guaranteeddDownloadMax")
+    rc_min: Optional[StrictInt] = Field(default=None, description="Minimum recurring cost in mbps", alias="rcMin")
+    rc_max: Optional[StrictInt] = Field(default=None, description="Maximum recurring cost in mbps", alias="rcMax")
+    distance: Optional[StrictInt] = Field(default=None, description="Estimation of the distance to the network to be built in meters")
     price_list_items_groups: Optional[EligibilityResultPriceListItemsGroups] = Field(default=None, alias="priceListItemsGroups")
-    offer_id: Optional[StrictInt] = Field(default=None, alias="offerId")
-    price_list_id: Optional[StrictInt] = Field(default=None, alias="priceListId")
-    combinations: Optional[List[EligibilityResultCombination]] = None
-    __properties: ClassVar[List[str]] = ["code", "tech", "delivery", "grtMin", "grtMax", "grtNonWorkingHoursOptionAvailable", "grtNonWorkingHoursOptionMandatory", "nrcMin", "nrcMax", "commitmentMin", "commitmentMax", "uploadMin", "uploadMax", "downloadMin", "downloadMax", "guaranteedUploadMin", "guaranteedUploadMax", "guaranteeddDownloadMin", "guaranteeddDownloadMax", "rcMin", "rcMax", "priceListItemsGroups", "offerId", "priceListId", "combinations"]
+    offer_id: Optional[StrictInt] = Field(default=None, description="Offer id, a unique identifier for the offer", alias="offerId")
+    price_list_id: Optional[StrictInt] = Field(default=None, description="Price list id, a unique identifier for the price list, samed id you can find in client contract", alias="priceListId")
+    combinations: Optional[List[EligibilityResultCombination]] = Field(default=None, description="List of combinations, with prices and attributes")
+    __properties: ClassVar[List[str]] = ["code", "tech", "delivery", "grtMin", "grtMax", "grtNonWorkingHoursOptionAvailable", "grtNonWorkingHoursOptionMandatory", "nrcMin", "nrcMax", "commitmentMin", "commitmentMax", "uploadMin", "uploadMax", "downloadMin", "downloadMax", "guaranteedUploadMin", "guaranteedUploadMax", "guaranteeddDownloadMin", "guaranteeddDownloadMax", "rcMin", "rcMax", "distance", "priceListItemsGroups", "offerId", "priceListId", "combinations"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -189,6 +190,11 @@ class EligibilityResult(BaseModel):
         if self.rc_max is None and "rc_max" in self.model_fields_set:
             _dict['rcMax'] = None
 
+        # set to None if distance (nullable) is None
+        # and model_fields_set contains the field
+        if self.distance is None and "distance" in self.model_fields_set:
+            _dict['distance'] = None
+
         # set to None if offer_id (nullable) is None
         # and model_fields_set contains the field
         if self.offer_id is None and "offer_id" in self.model_fields_set:
@@ -232,6 +238,7 @@ class EligibilityResult(BaseModel):
             "guaranteeddDownloadMax": obj.get("guaranteeddDownloadMax"),
             "rcMin": obj.get("rcMin"),
             "rcMax": obj.get("rcMax"),
+            "distance": obj.get("distance"),
             "priceListItemsGroups": EligibilityResultPriceListItemsGroups.from_dict(obj["priceListItemsGroups"]) if obj.get("priceListItemsGroups") is not None else None,
             "offerId": obj.get("offerId"),
             "priceListId": obj.get("priceListId"),

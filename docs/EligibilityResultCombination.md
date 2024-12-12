@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combination_id** | **str** |  | [optional] 
-**total** | **int** |  | [optional] 
-**total_without_nrc** | **int** |  | [optional] 
-**nrc** | **int** |  | [optional] 
-**attributes** | **Dict[str, object]** |  | [optional] 
+**combination_id** | **str** | Combination id, a unique identifier for the combination | [optional] 
+**total** | **int** | Total cost in €x100 | [optional] 
+**total_without_nrc** | **int** | Total recuring cost in €x100 | [optional] 
+**nrc** | **int** | Total non recuring cost in €x100 | [optional] 
+**attributes** | **Dict[str, object]** | Attributes of the combination | [optional] 
+**nrc_to_estimate** | **bool** | If offer contains a NRC to estimate | [optional] 
 
 ## Example
 

@@ -17,24 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from prizz_extranet.models.client_legal_entity import ClientLegalEntity
-from prizz_extranet.models.eligibility_result import EligibilityResult
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetEligibility(BaseModel):
+class OperationalStatus(BaseModel):
     """
-    GetEligibility
+    OperationalStatus
     """ # noqa: E501
-    wf: Optional[StrictInt] = Field(default=None, description="Workflow id")
-    wfs: Optional[StrictStr] = Field(default=None, description="Workflow status")
-    attrs: Optional[Dict[str, Any]] = Field(default=None, description="Attributes of the workflow")
-    wftr: Optional[List[Dict[str, Any]]] = Field(default=None, description="Workflow transitions history")
-    client: Optional[ClientLegalEntity] = None
-    response: Optional[List[EligibilityResult]] = Field(default=None, description="Eligibility results")
-    __properties: ClassVar[List[str]] = ["wf", "wfs", "attrs", "wftr", "client", "response"]
+    status: Optional[StrictStr] = None
+    last_check: Optional[StrictStr] = Field(default=None, alias="lastCheck")
+    __properties: ClassVar[List[str]] = ["status", "lastCheck"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +48,7 @@ class GetEligibility(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetEligibility from a JSON string"""
+        """Create an instance of OperationalStatus from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,21 +69,11 @@ class GetEligibility(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of client
-        if self.client:
-            _dict['client'] = self.client.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in response (list)
-        _items = []
-        if self.response:
-            for _item_response in self.response:
-                if _item_response:
-                    _items.append(_item_response.to_dict())
-            _dict['response'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetEligibility from a dict"""
+        """Create an instance of OperationalStatus from a dict"""
         if obj is None:
             return None
 
@@ -97,12 +81,8 @@ class GetEligibility(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "wf": obj.get("wf"),
-            "wfs": obj.get("wfs"),
-            "attrs": obj.get("attrs"),
-            "wftr": obj.get("wftr"),
-            "client": ClientLegalEntity.from_dict(obj["client"]) if obj.get("client") is not None else None,
-            "response": [EligibilityResult.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None
+            "status": obj.get("status"),
+            "lastCheck": obj.get("lastCheck")
         })
         return _obj
 

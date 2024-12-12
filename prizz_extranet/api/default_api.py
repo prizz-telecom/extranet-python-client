@@ -52,6 +52,7 @@ from prizz_extranet.models.legal_entity import LegalEntity
 from prizz_extranet.models.offer import Offer
 from prizz_extranet.models.offer_context import OfferContext
 from prizz_extranet.models.offer_context_shortened import OfferContextShortened
+from prizz_extranet.models.operational_status import OperationalStatus
 from prizz_extranet.models.operator_ticket import OperatorTicket
 from prizz_extranet.models.price_list import PriceList
 from prizz_extranet.models.price_list_item import PriceListItem
@@ -91,7 +92,7 @@ class DefaultApi:
     @validate_call
     def add_service_contract_comment(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         add_service_contract_comment: Optional[AddServiceContractComment] = None,
         _request_timeout: Union[
             None,
@@ -110,7 +111,7 @@ class DefaultApi:
 
         Add service contract comment
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param add_service_contract_comment:
         :type add_service_contract_comment: AddServiceContractComment
@@ -166,7 +167,7 @@ class DefaultApi:
     @validate_call
     def add_service_contract_comment_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         add_service_contract_comment: Optional[AddServiceContractComment] = None,
         _request_timeout: Union[
             None,
@@ -185,7 +186,7 @@ class DefaultApi:
 
         Add service contract comment
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param add_service_contract_comment:
         :type add_service_contract_comment: AddServiceContractComment
@@ -241,7 +242,7 @@ class DefaultApi:
     @validate_call
     def add_service_contract_comment_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         add_service_contract_comment: Optional[AddServiceContractComment] = None,
         _request_timeout: Union[
             None,
@@ -260,7 +261,7 @@ class DefaultApi:
 
         Add service contract comment
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param add_service_contract_comment:
         :type add_service_contract_comment: AddServiceContractComment
@@ -12516,6 +12517,277 @@ class DefaultApi:
 
 
     @validate_call
+    def get_service_contract_operational_status_by_name(
+        self,
+        service_name: Annotated[StrictStr, Field(description="identifiant du contrat de services")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OperationalStatus:
+        """Get service contract operational status
+
+        Le statut présenté est un état consolidé du résultat de plusieurs tests et de mesures en différents points du réseau effectué périodiquement. Les valeurs de status disponibles sont : - `ok` : votre service est produit normalement - `warning` : le service laisse penser qu'il nécessite une attention particulière (exemple: uptime faible) - `critical` : le service est interrompu - `unknown` : nous n'avons pas pu remonter l'état du service  L'attribut lastCheck vous indique quand le service a été testé pour la dernière fois 
+
+        :param service_name: identifiant du contrat de services (required)
+        :type service_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_service_contract_operational_status_by_name_serialize(
+            service_name=service_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationalStatus",
+            '401': None,
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_service_contract_operational_status_by_name_with_http_info(
+        self,
+        service_name: Annotated[StrictStr, Field(description="identifiant du contrat de services")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OperationalStatus]:
+        """Get service contract operational status
+
+        Le statut présenté est un état consolidé du résultat de plusieurs tests et de mesures en différents points du réseau effectué périodiquement. Les valeurs de status disponibles sont : - `ok` : votre service est produit normalement - `warning` : le service laisse penser qu'il nécessite une attention particulière (exemple: uptime faible) - `critical` : le service est interrompu - `unknown` : nous n'avons pas pu remonter l'état du service  L'attribut lastCheck vous indique quand le service a été testé pour la dernière fois 
+
+        :param service_name: identifiant du contrat de services (required)
+        :type service_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_service_contract_operational_status_by_name_serialize(
+            service_name=service_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationalStatus",
+            '401': None,
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_service_contract_operational_status_by_name_without_preload_content(
+        self,
+        service_name: Annotated[StrictStr, Field(description="identifiant du contrat de services")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get service contract operational status
+
+        Le statut présenté est un état consolidé du résultat de plusieurs tests et de mesures en différents points du réseau effectué périodiquement. Les valeurs de status disponibles sont : - `ok` : votre service est produit normalement - `warning` : le service laisse penser qu'il nécessite une attention particulière (exemple: uptime faible) - `critical` : le service est interrompu - `unknown` : nous n'avons pas pu remonter l'état du service  L'attribut lastCheck vous indique quand le service a été testé pour la dernière fois 
+
+        :param service_name: identifiant du contrat de services (required)
+        :type service_name: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_service_contract_operational_status_by_name_serialize(
+            service_name=service_name,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationalStatus",
+            '401': None,
+            '403': None,
+            '404': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_service_contract_operational_status_by_name_serialize(
+        self,
+        service_name,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if service_name is not None:
+            _path_params['service_name'] = service_name
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'tokenAuth', 
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/external-api/v2/service_contracts_by_name/{service_name}/operational_status',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_service_contracts(
         self,
         page: Optional[StrictInt] = None,
@@ -16217,7 +16489,7 @@ class DefaultApi:
     @validate_call
     def set_service_contract_vlan(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         set_service_contract_vlan_request: SetServiceContractVlanRequest,
         _request_timeout: Union[
             None,
@@ -16236,7 +16508,7 @@ class DefaultApi:
 
         Set service contract vlan
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param set_service_contract_vlan_request: (required)
         :type set_service_contract_vlan_request: SetServiceContractVlanRequest
@@ -16292,7 +16564,7 @@ class DefaultApi:
     @validate_call
     def set_service_contract_vlan_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         set_service_contract_vlan_request: SetServiceContractVlanRequest,
         _request_timeout: Union[
             None,
@@ -16311,7 +16583,7 @@ class DefaultApi:
 
         Set service contract vlan
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param set_service_contract_vlan_request: (required)
         :type set_service_contract_vlan_request: SetServiceContractVlanRequest
@@ -16367,7 +16639,7 @@ class DefaultApi:
     @validate_call
     def set_service_contract_vlan_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="service pack identifier")],
+        id: Annotated[StrictInt, Field(description="service contract identifier")],
         set_service_contract_vlan_request: SetServiceContractVlanRequest,
         _request_timeout: Union[
             None,
@@ -16386,7 +16658,7 @@ class DefaultApi:
 
         Set service contract vlan
 
-        :param id: service pack identifier (required)
+        :param id: service contract identifier (required)
         :type id: int
         :param set_service_contract_vlan_request: (required)
         :type set_service_contract_vlan_request: SetServiceContractVlanRequest

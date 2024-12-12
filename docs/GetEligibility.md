@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**wf** | **int** |  | [optional] 
-**wfs** | **str** |  | [optional] 
-**attrs** | **object** |  | [optional] 
-**wftr** | **List[object]** |  | [optional] 
+**wf** | **int** | Workflow id | [optional] 
+**wfs** | **str** | Workflow status | [optional] 
+**attrs** | **object** | Attributes of the workflow | [optional] 
+**wftr** | **List[object]** | Workflow transitions history | [optional] 
 **client** | [**ClientLegalEntity**](ClientLegalEntity.md) |  | [optional] 
-**response** | [**List[EligibilityResult]**](EligibilityResult.md) |  | [optional] 
+**response** | [**List[EligibilityResult]**](EligibilityResult.md) | Eligibility results | [optional] 
 
 ## Example
 

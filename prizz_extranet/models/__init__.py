@@ -66,6 +66,7 @@ from prizz_extranet.models.offer import Offer
 from prizz_extranet.models.offer_context import OfferContext
 from prizz_extranet.models.offer_context_shortened import OfferContextShortened
 from prizz_extranet.models.offer_item import OfferItem
+from prizz_extranet.models.operational_status import OperationalStatus
 from prizz_extranet.models.operator import Operator
 from prizz_extranet.models.operator_ticket import OperatorTicket
 from prizz_extranet.models.price_list import PriceList

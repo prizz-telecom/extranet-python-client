@@ -39,8 +39,8 @@ class Offer(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['DELIVERY_DOOR', 'L2', 'FON', 'TV_ANT', 'MOBILE']):
-            raise ValueError("must be one of enum values ('DELIVERY_DOOR', 'L2', 'FON', 'TV_ANT', 'MOBILE')")
+        if value not in set(['DELIVERY_DOOR', 'L2', 'FON', 'TV_ANT', 'MOBILE', 'DESSERTE']):
+            raise ValueError("must be one of enum values ('DELIVERY_DOOR', 'L2', 'FON', 'TV_ANT', 'MOBILE', 'DESSERTE')")
         return value
 
     model_config = ConfigDict(
