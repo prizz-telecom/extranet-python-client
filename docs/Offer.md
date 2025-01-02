@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
 **name** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
 **main_offer_item** | [**OfferItem**](OfferItem.md) |  | [optional] 
 **offer_type** | **str** |  | [optional] 
 

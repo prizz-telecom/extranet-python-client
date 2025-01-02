@@ -29,9 +29,10 @@ class Offer(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = None
     name: Optional[StrictStr] = None
+    description: Optional[StrictStr] = None
     main_offer_item: Optional[OfferItem] = Field(default=None, alias="mainOfferItem")
     offer_type: Optional[StrictStr] = Field(default=None, alias="offerType")
-    __properties: ClassVar[List[str]] = ["id", "name", "mainOfferItem", "offerType"]
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "mainOfferItem", "offerType"]
 
     @field_validator('offer_type')
     def offer_type_validate_enum(cls, value):
@@ -85,6 +86,11 @@ class Offer(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of main_offer_item
         if self.main_offer_item:
             _dict['mainOfferItem'] = self.main_offer_item.to_dict()
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
         # set to None if offer_type (nullable) is None
         # and model_fields_set contains the field
         if self.offer_type is None and "offer_type" in self.model_fields_set:
@@ -104,6 +110,7 @@ class Offer(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "description": obj.get("description"),
             "mainOfferItem": OfferItem.from_dict(obj["mainOfferItem"]) if obj.get("mainOfferItem") is not None else None,
             "offerType": obj.get("offerType")
         })
