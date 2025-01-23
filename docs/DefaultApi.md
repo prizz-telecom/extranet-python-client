@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**create_ticket_operator**](DefaultApi.md#create_ticket_operator) | **POST** /external-api/v2/exploitation/operator/{id} | Exploitation Operator Tickets
 [**create_workflow**](DefaultApi.md#create_workflow) | **POST** /external-api/v2/workflow | Workflows
 [**eligibility_history**](DefaultApi.md#eligibility_history) | **GET** /external-api/v2/eligibility/history | Eligibility History
+[**fast_order**](DefaultApi.md#fast_order) | **POST** /external-api/v2/commercial_offers/fast_order/{elig_ctx_id} | Fast order with eligiblity result
 [**get_api_tokens**](DefaultApi.md#get_api_tokens) | **GET** /external-api/v2/users/api_tokens | User Api Tokens
 [**get_attachment**](DefaultApi.md#get_attachment) | **GET** /external-api/v2/attachments/{id} | Attachment
 [**get_client_legal_entities**](DefaultApi.md#get_client_legal_entities) | **GET** /external-api/v2/client_legal_entities | Client legal entities
@@ -18,9 +19,9 @@ Method | HTTP request | Description
 [**get_comment_thread**](DefaultApi.md#get_comment_thread) | **GET** /external-api/v2/comments/threads/{id} | Comment thread
 [**get_comment_threads**](DefaultApi.md#get_comment_threads) | **GET** /external-api/v2/comments/threads | Comment threads
 [**get_commercial_offer**](DefaultApi.md#get_commercial_offer) | **GET** /external-api/v2/commercial_offers/{id} | Commercial Offer
-[**get_commercial_offer_by_name**](DefaultApi.md#get_commercial_offer_by_name) | **GET** /external-api/v2/commercial_offers_by_name/{offer_name} | Commercial Offer
+[**get_commercial_offer_by_name**](DefaultApi.md#get_commercial_offer_by_name) | **GET** /external-api/v2/commercial_offers_by_name/{offer_name} | Commercial Offer by reference CPTXXXXXX, CPIXXXXXX
 [**get_commercial_offer_item**](DefaultApi.md#get_commercial_offer_item) | **GET** /external-api/v2/commercial_offer_items/{id} | Commercial Offer Item
-[**get_commercial_offer_pdf**](DefaultApi.md#get_commercial_offer_pdf) | **GET** /external-api/v2/commercial_offers/{id}/pdf | Commercial Offer Pdf
+[**get_commercial_offer_pdf**](DefaultApi.md#get_commercial_offer_pdf) | **GET** /external-api/v2/commercial_offers/{id}/pdf | Commercial Offer PDF
 [**get_commercial_offer_section**](DefaultApi.md#get_commercial_offer_section) | **GET** /external-api/v2/commercial_offer_sections/{id} | Commercial Offer Section
 [**get_commercial_offers**](DefaultApi.md#get_commercial_offers) | **GET** /external-api/v2/commercial_offers | Commercial Offers
 [**get_current_user**](DefaultApi.md#get_current_user) | **GET** /external-api/v2/user | User
@@ -702,6 +703,98 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **fast_order**
+> CreateCommercialOffer201Response fast_order(elig_ctx_id, fast_order)
+
+Fast order with eligiblity result
+
+Créer un devis à partir d'un résultat d'éligibilité
+
+### Example
+
+* Api Key Authentication (tokenAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import prizz_extranet
+from prizz_extranet.models.create_commercial_offer201_response import CreateCommercialOffer201Response
+from prizz_extranet.models.fast_order import FastOrder
+from prizz_extranet.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://my.tests.prizz-telecom.fr
+# See configuration.py for a list of all supported configuration parameters.
+configuration = prizz_extranet.Configuration(
+    host = "https://my.tests.prizz-telecom.fr"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: tokenAuth
+configuration.api_key['tokenAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['tokenAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = prizz_extranet.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with prizz_extranet.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = prizz_extranet.DefaultApi(api_client)
+    elig_ctx_id = 56 # int | identifiant du contexte d'éligibilité
+    fast_order = prizz_extranet.FastOrder() # FastOrder | 
+
+    try:
+        # Fast order with eligiblity result
+        api_response = api_instance.fast_order(elig_ctx_id, fast_order)
+        print("The response of DefaultApi->fast_order:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->fast_order: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **elig_ctx_id** | **int**| identifiant du contexte d&#39;éligibilité | 
+ **fast_order** | [**FastOrder**](FastOrder.md)|  | 
+
+### Return type
+
+[**CreateCommercialOffer201Response**](CreateCommercialOffer201Response.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | section créée |  -  |
+**400** | bad request |  -  |
+**401** | need authentication |  -  |
+**403** | access denied |  -  |
+**404** | resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_api_tokens**
 > GetApiTokens200Response get_api_tokens(page=page, items_per_page=items_per_page)
 
@@ -1327,9 +1420,9 @@ Name | Type | Description  | Notes
 # **get_commercial_offer_by_name**
 > CommercialOffer get_commercial_offer_by_name(offer_name)
 
-Commercial Offer
+Commercial Offer by reference CPTXXXXXX, CPIXXXXXX
 
-Get commercial offer by name
+Get commercial offer by reference
 
 ### Example
 
@@ -1371,7 +1464,7 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     offer_name = 'offer_name_example' # str | commercial offer name string
 
     try:
-        # Commercial Offer
+        # Commercial Offer by reference CPTXXXXXX, CPIXXXXXX
         api_response = api_instance.get_commercial_offer_by_name(offer_name)
         print("The response of DefaultApi->get_commercial_offer_by_name:\n")
         pprint(api_response)
@@ -1503,9 +1596,9 @@ Name | Type | Description  | Notes
 # **get_commercial_offer_pdf**
 > bytearray get_commercial_offer_pdf(id)
 
-Commercial Offer Pdf
+Commercial Offer PDF
 
-Récupérer le pdf d'un devis
+Récupérer le PDF d'un devis
 
 ### Example
 
@@ -1546,7 +1639,7 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     id = 56 # int | identifiant du devis
 
     try:
-        # Commercial Offer Pdf
+        # Commercial Offer PDF
         api_response = api_instance.get_commercial_offer_pdf(id)
         print("The response of DefaultApi->get_commercial_offer_pdf:\n")
         pprint(api_response)

@@ -17,19 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateCommercialOfferSection(BaseModel):
+class FastOrder(BaseModel):
     """
-    CreateCommercialOfferSection
+    FastOrder
     """ # noqa: E501
     name: Optional[StrictStr] = None
     client_reference: Optional[StrictStr] = Field(default=None, alias="clientReference")
-    client_contract_id: Optional[StrictInt] = Field(default=None, alias="clientContractId")
-    __properties: ClassVar[List[str]] = ["name", "clientReference", "clientContractId"]
+    combination_id: Optional[StrictStr] = Field(default=None, alias="combinationId")
+    __properties: ClassVar[List[str]] = ["name", "clientReference", "combinationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +49,7 @@ class CreateCommercialOfferSection(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateCommercialOfferSection from a JSON string"""
+        """Create an instance of FastOrder from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,11 +70,16 @@ class CreateCommercialOfferSection(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if client_reference (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_reference is None and "client_reference" in self.model_fields_set:
+            _dict['clientReference'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateCommercialOfferSection from a dict"""
+        """Create an instance of FastOrder from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +89,7 @@ class CreateCommercialOfferSection(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "clientReference": obj.get("clientReference"),
-            "clientContractId": obj.get("clientContractId")
+            "combinationId": obj.get("combinationId")
         })
         return _obj
 

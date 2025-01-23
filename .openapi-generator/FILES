@@ -34,6 +34,7 @@ docs/EligibilityPriceListItem.md
 docs/EligibilityResult.md
 docs/EligibilityResultCombination.md
 docs/EligibilityResultPriceListItemsGroups.md
+docs/FastOrder.md
 docs/GetApiTokens200Response.md
 docs/GetClientLegalEntities200Response.md
 docs/GetClientLegalEntities200ResponsePagination.md
@@ -135,6 +136,7 @@ prizz_extranet/models/eligibility_price_list_item.py
 prizz_extranet/models/eligibility_result.py
 prizz_extranet/models/eligibility_result_combination.py
 prizz_extranet/models/eligibility_result_price_list_items_groups.py
+prizz_extranet/models/fast_order.py
 prizz_extranet/models/get_api_tokens200_response.py
 prizz_extranet/models/get_client_legal_entities200_response.py
 prizz_extranet/models/get_client_legal_entities200_response_pagination.py
@@ -205,4 +207,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_fast_order.py
 tox.ini
