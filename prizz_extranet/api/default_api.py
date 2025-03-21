@@ -3020,6 +3020,7 @@ class DefaultApi:
         items_per_page: Optional[StrictInt] = None,
         sort_id: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3045,6 +3046,8 @@ class DefaultApi:
         :type sort_id: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3072,6 +3075,7 @@ class DefaultApi:
             items_per_page=items_per_page,
             sort_id=sort_id,
             legal_entity_id=legal_entity_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3100,6 +3104,7 @@ class DefaultApi:
         items_per_page: Optional[StrictInt] = None,
         sort_id: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3125,6 +3130,8 @@ class DefaultApi:
         :type sort_id: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3152,6 +3159,7 @@ class DefaultApi:
             items_per_page=items_per_page,
             sort_id=sort_id,
             legal_entity_id=legal_entity_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3180,6 +3188,7 @@ class DefaultApi:
         items_per_page: Optional[StrictInt] = None,
         sort_id: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3205,6 +3214,8 @@ class DefaultApi:
         :type sort_id: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3232,6 +3243,7 @@ class DefaultApi:
             items_per_page=items_per_page,
             sort_id=sort_id,
             legal_entity_id=legal_entity_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3255,6 +3267,7 @@ class DefaultApi:
         items_per_page,
         sort_id,
         legal_entity_id,
+        search,
         _request_auth,
         _content_type,
         _headers,
@@ -3292,6 +3305,10 @@ class DefaultApi:
         if legal_entity_id is not None:
             
             _query_params.append(('legalEntityId', legal_entity_id))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         # process the header parameters
         # process the form parameters
@@ -5531,6 +5548,7 @@ class DefaultApi:
         status: Optional[StrictStr] = None,
         create_date_from: Optional[date] = None,
         create_date_to: Optional[date] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5568,6 +5586,8 @@ class DefaultApi:
         :type create_date_from: date
         :param create_date_to:
         :type create_date_to: date
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5601,6 +5621,7 @@ class DefaultApi:
             status=status,
             create_date_from=create_date_from,
             create_date_to=create_date_to,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5635,6 +5656,7 @@ class DefaultApi:
         status: Optional[StrictStr] = None,
         create_date_from: Optional[date] = None,
         create_date_to: Optional[date] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5672,6 +5694,8 @@ class DefaultApi:
         :type create_date_from: date
         :param create_date_to:
         :type create_date_to: date
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5705,6 +5729,7 @@ class DefaultApi:
             status=status,
             create_date_from=create_date_from,
             create_date_to=create_date_to,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5739,6 +5764,7 @@ class DefaultApi:
         status: Optional[StrictStr] = None,
         create_date_from: Optional[date] = None,
         create_date_to: Optional[date] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5776,6 +5802,8 @@ class DefaultApi:
         :type create_date_from: date
         :param create_date_to:
         :type create_date_to: date
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5809,6 +5837,7 @@ class DefaultApi:
             status=status,
             create_date_from=create_date_from,
             create_date_to=create_date_to,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5838,6 +5867,7 @@ class DefaultApi:
         status,
         create_date_from,
         create_date_to,
+        search,
         _request_auth,
         _content_type,
         _headers,
@@ -5917,6 +5947,10 @@ class DefaultApi:
                 )
             else:
                 _query_params.append(('createDate[to]', create_date_to))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         # process the header parameters
         # process the form parameters
@@ -7594,6 +7628,7 @@ class DefaultApi:
         legal_entity_id: Optional[StrictInt] = None,
         month: Optional[StrictInt] = None,
         year: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7627,6 +7662,8 @@ class DefaultApi:
         :type month: int
         :param year:
         :type year: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7658,6 +7695,7 @@ class DefaultApi:
             legal_entity_id=legal_entity_id,
             month=month,
             year=year,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7690,6 +7728,7 @@ class DefaultApi:
         legal_entity_id: Optional[StrictInt] = None,
         month: Optional[StrictInt] = None,
         year: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7723,6 +7762,8 @@ class DefaultApi:
         :type month: int
         :param year:
         :type year: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7754,6 +7795,7 @@ class DefaultApi:
             legal_entity_id=legal_entity_id,
             month=month,
             year=year,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7786,6 +7828,7 @@ class DefaultApi:
         legal_entity_id: Optional[StrictInt] = None,
         month: Optional[StrictInt] = None,
         year: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7819,6 +7862,8 @@ class DefaultApi:
         :type month: int
         :param year:
         :type year: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7850,6 +7895,7 @@ class DefaultApi:
             legal_entity_id=legal_entity_id,
             month=month,
             year=year,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7877,6 +7923,7 @@ class DefaultApi:
         legal_entity_id,
         month,
         year,
+        search,
         _request_auth,
         _content_type,
         _headers,
@@ -7930,6 +7977,10 @@ class DefaultApi:
         if year is not None:
             
             _query_params.append(('year', year))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         # process the header parameters
         # process the form parameters
@@ -13099,6 +13150,8 @@ class DefaultApi:
         sort_status: Optional[StrictStr] = None,
         status: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        offer_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13128,6 +13181,10 @@ class DefaultApi:
         :type status: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param offer_id:
+        :type offer_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -13157,6 +13214,8 @@ class DefaultApi:
             sort_status=sort_status,
             status=status,
             legal_entity_id=legal_entity_id,
+            offer_id=offer_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -13187,6 +13246,8 @@ class DefaultApi:
         sort_status: Optional[StrictStr] = None,
         status: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        offer_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13216,6 +13277,10 @@ class DefaultApi:
         :type status: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param offer_id:
+        :type offer_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -13245,6 +13310,8 @@ class DefaultApi:
             sort_status=sort_status,
             status=status,
             legal_entity_id=legal_entity_id,
+            offer_id=offer_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -13275,6 +13342,8 @@ class DefaultApi:
         sort_status: Optional[StrictStr] = None,
         status: Optional[StrictStr] = None,
         legal_entity_id: Optional[StrictInt] = None,
+        offer_id: Optional[StrictInt] = None,
+        search: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13304,6 +13373,10 @@ class DefaultApi:
         :type status: str
         :param legal_entity_id:
         :type legal_entity_id: int
+        :param offer_id:
+        :type offer_id: int
+        :param search:
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -13333,6 +13406,8 @@ class DefaultApi:
             sort_status=sort_status,
             status=status,
             legal_entity_id=legal_entity_id,
+            offer_id=offer_id,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -13358,6 +13433,8 @@ class DefaultApi:
         sort_status,
         status,
         legal_entity_id,
+        offer_id,
+        search,
         _request_auth,
         _content_type,
         _headers,
@@ -13403,6 +13480,14 @@ class DefaultApi:
         if legal_entity_id is not None:
             
             _query_params.append(('legalEntityId', legal_entity_id))
+            
+        if offer_id is not None:
+            
+            _query_params.append(('offerId', offer_id))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         # process the header parameters
         # process the form parameters

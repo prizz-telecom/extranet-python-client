@@ -787,7 +787,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | section créée |  -  |
+**201** | devis créée |  -  |
 **400** | bad request |  -  |
 **401** | need authentication |  -  |
 **403** | access denied |  -  |
@@ -972,7 +972,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_client_legal_entities**
-> GetClientLegalEntities200Response get_client_legal_entities(page=page, items_per_page=items_per_page, sort_id=sort_id, legal_entity_id=legal_entity_id)
+> GetClientLegalEntities200Response get_client_legal_entities(page=page, items_per_page=items_per_page, sort_id=sort_id, legal_entity_id=legal_entity_id, search=search)
 
 Client legal entities
 
@@ -1019,10 +1019,11 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     items_per_page = 56 # int |  (optional)
     sort_id = 'sort_id_example' # str |  (optional)
     legal_entity_id = 56 # int |  (optional)
+    search = 'search_example' # str |  (optional)
 
     try:
         # Client legal entities
-        api_response = api_instance.get_client_legal_entities(page=page, items_per_page=items_per_page, sort_id=sort_id, legal_entity_id=legal_entity_id)
+        api_response = api_instance.get_client_legal_entities(page=page, items_per_page=items_per_page, sort_id=sort_id, legal_entity_id=legal_entity_id, search=search)
         print("The response of DefaultApi->get_client_legal_entities:\n")
         pprint(api_response)
     except Exception as e:
@@ -1040,6 +1041,7 @@ Name | Type | Description  | Notes
  **items_per_page** | **int**|  | [optional] 
  **sort_id** | **str**|  | [optional] 
  **legal_entity_id** | **int**|  | [optional] 
+ **search** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1769,7 +1771,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_commercial_offers**
-> GetCommercialOffers200Response get_commercial_offers(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, legal_entity_id=legal_entity_id, client_legal_entity_id=client_legal_entity_id, sections_offer_id=sections_offer_id, status=status, create_date_from=create_date_from, create_date_to=create_date_to)
+> GetCommercialOffers200Response get_commercial_offers(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, legal_entity_id=legal_entity_id, client_legal_entity_id=client_legal_entity_id, sections_offer_id=sections_offer_id, status=status, create_date_from=create_date_from, create_date_to=create_date_to, search=search)
 
 Commercial Offers
 
@@ -1822,10 +1824,11 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     status = 'status_example' # str |  (optional)
     create_date_from = '2013-10-20' # date |  (optional)
     create_date_to = '2013-10-20' # date |  (optional)
+    search = 'search_example' # str |  (optional)
 
     try:
         # Commercial Offers
-        api_response = api_instance.get_commercial_offers(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, legal_entity_id=legal_entity_id, client_legal_entity_id=client_legal_entity_id, sections_offer_id=sections_offer_id, status=status, create_date_from=create_date_from, create_date_to=create_date_to)
+        api_response = api_instance.get_commercial_offers(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, legal_entity_id=legal_entity_id, client_legal_entity_id=client_legal_entity_id, sections_offer_id=sections_offer_id, status=status, create_date_from=create_date_from, create_date_to=create_date_to, search=search)
         print("The response of DefaultApi->get_commercial_offers:\n")
         pprint(api_response)
     except Exception as e:
@@ -1849,6 +1852,7 @@ Name | Type | Description  | Notes
  **status** | **str**|  | [optional] 
  **create_date_from** | **date**|  | [optional] 
  **create_date_to** | **date**|  | [optional] 
+ **search** | **str**|  | [optional] 
 
 ### Return type
 
@@ -2397,7 +2401,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_invoices**
-> GetInvoices200Response get_invoices(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, client_legal_entity_id=client_legal_entity_id, legal_entity_id=legal_entity_id, month=month, year=year)
+> GetInvoices200Response get_invoices(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, client_legal_entity_id=client_legal_entity_id, legal_entity_id=legal_entity_id, month=month, year=year, search=search)
 
 Invoices
 
@@ -2448,10 +2452,11 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     legal_entity_id = 56 # int |  (optional)
     month = 56 # int |  (optional)
     year = 56 # int |  (optional)
+    search = 'search_example' # str |  (optional)
 
     try:
         # Invoices
-        api_response = api_instance.get_invoices(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, client_legal_entity_id=client_legal_entity_id, legal_entity_id=legal_entity_id, month=month, year=year)
+        api_response = api_instance.get_invoices(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_create_date=sort_create_date, client_legal_entity_id=client_legal_entity_id, legal_entity_id=legal_entity_id, month=month, year=year, search=search)
         print("The response of DefaultApi->get_invoices:\n")
         pprint(api_response)
     except Exception as e:
@@ -2473,6 +2478,7 @@ Name | Type | Description  | Notes
  **legal_entity_id** | **int**|  | [optional] 
  **month** | **int**|  | [optional] 
  **year** | **int**|  | [optional] 
+ **search** | **str**|  | [optional] 
 
 ### Return type
 
@@ -4093,7 +4099,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_service_contracts**
-> GetServiceContracts200Response get_service_contracts(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_status=sort_status, status=status, legal_entity_id=legal_entity_id)
+> GetServiceContracts200Response get_service_contracts(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_status=sort_status, status=status, legal_entity_id=legal_entity_id, offer_id=offer_id, search=search)
 
 Service Contracts
 
@@ -4142,10 +4148,12 @@ with prizz_extranet.ApiClient(configuration) as api_client:
     sort_status = 'sort_status_example' # str |  (optional)
     status = 'status_example' # str |  (optional)
     legal_entity_id = 56 # int |  (optional)
+    offer_id = 56 # int |  (optional)
+    search = 'search_example' # str |  (optional)
 
     try:
         # Service Contracts
-        api_response = api_instance.get_service_contracts(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_status=sort_status, status=status, legal_entity_id=legal_entity_id)
+        api_response = api_instance.get_service_contracts(page=page, items_per_page=items_per_page, sort_id=sort_id, sort_status=sort_status, status=status, legal_entity_id=legal_entity_id, offer_id=offer_id, search=search)
         print("The response of DefaultApi->get_service_contracts:\n")
         pprint(api_response)
     except Exception as e:
@@ -4165,6 +4173,8 @@ Name | Type | Description  | Notes
  **sort_status** | **str**|  | [optional] 
  **status** | **str**|  | [optional] 
  **legal_entity_id** | **int**|  | [optional] 
+ **offer_id** | **int**|  | [optional] 
+ **search** | **str**|  | [optional] 
 
 ### Return type
 
