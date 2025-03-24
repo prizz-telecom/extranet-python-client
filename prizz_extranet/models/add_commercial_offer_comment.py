@@ -17,22 +17,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from prizz_extranet.models.get_workflow_redirect import GetWorkflowRedirect
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetWorkflow(BaseModel):
+class AddCommercialOfferComment(BaseModel):
     """
-    GetWorkflow
+    AddCommercialOfferComment
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    state: Optional[StrictStr] = None
-    success: Optional[StrictBool] = None
-    log: Optional[StrictStr] = None
-    redirect: Optional[GetWorkflowRedirect] = None
-    __properties: ClassVar[List[str]] = ["id", "state", "success", "log", "redirect"]
+    title: Optional[StrictStr] = None
+    thread_id: Optional[StrictInt] = Field(default=None, alias="threadId")
+    parent_id: Optional[StrictInt] = Field(default=None, alias="parentId")
+    content_type: Optional[StrictStr] = Field(default=None, alias="contentType")
+    content: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["title", "threadId", "parentId", "contentType", "content"]
+
+    @field_validator('content_type')
+    def content_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['text', 'markdown']):
+            raise ValueError("must be one of enum values ('text', 'markdown')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +61,7 @@ class GetWorkflow(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetWorkflow from a JSON string"""
+        """Create an instance of AddCommercialOfferComment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,19 +82,31 @@ class GetWorkflow(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of redirect
-        if self.redirect:
-            _dict['redirect'] = self.redirect.to_dict()
-        # set to None if log (nullable) is None
+        # set to None if title (nullable) is None
         # and model_fields_set contains the field
-        if self.log is None and "log" in self.model_fields_set:
-            _dict['log'] = None
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if thread_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.thread_id is None and "thread_id" in self.model_fields_set:
+            _dict['threadId'] = None
+
+        # set to None if parent_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_id is None and "parent_id" in self.model_fields_set:
+            _dict['parentId'] = None
+
+        # set to None if content_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.content_type is None and "content_type" in self.model_fields_set:
+            _dict['contentType'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetWorkflow from a dict"""
+        """Create an instance of AddCommercialOfferComment from a dict"""
         if obj is None:
             return None
 
@@ -93,11 +114,11 @@ class GetWorkflow(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "state": obj.get("state"),
-            "success": obj.get("success"),
-            "log": obj.get("log"),
-            "redirect": GetWorkflowRedirect.from_dict(obj["redirect"]) if obj.get("redirect") is not None else None
+            "title": obj.get("title"),
+            "threadId": obj.get("threadId"),
+            "parentId": obj.get("parentId"),
+            "contentType": obj.get("contentType"),
+            "content": obj.get("content")
         })
         return _obj
 

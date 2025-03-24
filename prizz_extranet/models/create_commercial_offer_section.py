@@ -70,6 +70,11 @@ class CreateCommercialOfferSection(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if client_reference (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_reference is None and "client_reference" in self.model_fields_set:
+            _dict['clientReference'] = None
+
         return _dict
 
     @classmethod

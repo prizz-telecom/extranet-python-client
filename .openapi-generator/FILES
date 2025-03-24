@@ -3,7 +3,12 @@
 .gitlab-ci.yml
 .travis.yml
 README.md
+docs/AddCommercialOfferComment.md
 docs/AddServiceContractComment.md
+docs/Appointment.md
+docs/AppointmentContact.md
+docs/AppointmentServiceContract.md
+docs/AppointmentTech.md
 docs/ArchivedProcess.md
 docs/Attachment.md
 docs/ClientContract.md
@@ -36,6 +41,7 @@ docs/EligibilityResultCombination.md
 docs/EligibilityResultPriceListItemsGroups.md
 docs/FastOrder.md
 docs/GetApiTokens200Response.md
+docs/GetAppointments200Response.md
 docs/GetClientLegalEntities200Response.md
 docs/GetClientLegalEntities200ResponsePagination.md
 docs/GetCommercialOffers200Response.md
@@ -106,7 +112,12 @@ prizz_extranet/api_response.py
 prizz_extranet/configuration.py
 prizz_extranet/exceptions.py
 prizz_extranet/models/__init__.py
+prizz_extranet/models/add_commercial_offer_comment.py
 prizz_extranet/models/add_service_contract_comment.py
+prizz_extranet/models/appointment.py
+prizz_extranet/models/appointment_contact.py
+prizz_extranet/models/appointment_service_contract.py
+prizz_extranet/models/appointment_tech.py
 prizz_extranet/models/archived_process.py
 prizz_extranet/models/attachment.py
 prizz_extranet/models/client_contract.py
@@ -138,6 +149,7 @@ prizz_extranet/models/eligibility_result_combination.py
 prizz_extranet/models/eligibility_result_price_list_items_groups.py
 prizz_extranet/models/fast_order.py
 prizz_extranet/models/get_api_tokens200_response.py
+prizz_extranet/models/get_appointments200_response.py
 prizz_extranet/models/get_client_legal_entities200_response.py
 prizz_extranet/models/get_client_legal_entities200_response_pagination.py
 prizz_extranet/models/get_commercial_offers200_response.py
@@ -207,4 +219,10 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_add_commercial_offer_comment.py
+test/test_appointment.py
+test/test_appointment_contact.py
+test/test_appointment_service_contract.py
+test/test_appointment_tech.py
+test/test_get_appointments200_response.py
 tox.ini

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **state** | **str** |  | [optional] 
 **success** | **bool** |  | [optional] 
+**log** | **str** |  | [optional] 
 **redirect** | [**GetWorkflowRedirect**](GetWorkflowRedirect.md) |  | [optional] 
 
 ## Example

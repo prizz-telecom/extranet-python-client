@@ -82,16 +82,16 @@ configuration = prizz_extranet.Configuration(
 with prizz_extranet.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = prizz_extranet.DefaultApi(api_client)
-    id = 56 # int | service contract identifier
-    add_service_contract_comment = prizz_extranet.AddServiceContractComment() # AddServiceContractComment |  (optional)
+    id = 56 # int | commercial offer identifier
+    add_commercial_offer_comment = prizz_extranet.AddCommercialOfferComment() # AddCommercialOfferComment |  (optional)
 
     try:
-        # Service Contract add comment
-        api_response = api_instance.add_service_contract_comment(id, add_service_contract_comment=add_service_contract_comment)
-        print("The response of DefaultApi->add_service_contract_comment:\n")
+        # Commercial offer add comment
+        api_response = api_instance.add_commercial_offer_comment(id, add_commercial_offer_comment=add_commercial_offer_comment)
+        print("The response of DefaultApi->add_commercial_offer_comment:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling DefaultApi->add_service_contract_comment: %s\n" % e)
+        print("Exception when calling DefaultApi->add_commercial_offer_comment: %s\n" % e)
 
 ```
 
@@ -101,6 +101,7 @@ All URIs are relative to *https://my.tests.prizz-telecom.fr*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**add_commercial_offer_comment**](docs/DefaultApi.md#add_commercial_offer_comment) | **POST** /external-api/v2/commercial_offers/{id}/comments | Commercial offer add comment
 *DefaultApi* | [**add_service_contract_comment**](docs/DefaultApi.md#add_service_contract_comment) | **POST** /external-api/v2/service_contracts/{id}/comments | Service Contract add comment
 *DefaultApi* | [**create_commercial_offer**](docs/DefaultApi.md#create_commercial_offer) | **POST** /external-api/v2/commercial_offers | Commercial Offers
 *DefaultApi* | [**create_commercial_offer_section**](docs/DefaultApi.md#create_commercial_offer_section) | **POST** /external-api/v2/commercial_offers/{id}/sections | Commercial Offer Sections
@@ -110,6 +111,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**eligibility_history**](docs/DefaultApi.md#eligibility_history) | **GET** /external-api/v2/eligibility/history | Eligibility History
 *DefaultApi* | [**fast_order**](docs/DefaultApi.md#fast_order) | **POST** /external-api/v2/commercial_offers/fast_order/{elig_ctx_id} | Fast order with eligiblity result
 *DefaultApi* | [**get_api_tokens**](docs/DefaultApi.md#get_api_tokens) | **GET** /external-api/v2/users/api_tokens | User Api Tokens
+*DefaultApi* | [**get_appointment**](docs/DefaultApi.md#get_appointment) | **GET** /external-api/v2/appointments/{id} | Appointment
+*DefaultApi* | [**get_appointments**](docs/DefaultApi.md#get_appointments) | **GET** /external-api/v2/appointments | Appointments
 *DefaultApi* | [**get_attachment**](docs/DefaultApi.md#get_attachment) | **GET** /external-api/v2/attachments/{id} | Attachment
 *DefaultApi* | [**get_client_legal_entities**](docs/DefaultApi.md#get_client_legal_entities) | **GET** /external-api/v2/client_legal_entities | Client legal entities
 *DefaultApi* | [**get_client_legal_entity**](docs/DefaultApi.md#get_client_legal_entity) | **GET** /external-api/v2/client_legal_entities/{id} | Client legal entity
@@ -166,7 +169,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AddCommercialOfferComment](docs/AddCommercialOfferComment.md)
  - [AddServiceContractComment](docs/AddServiceContractComment.md)
+ - [Appointment](docs/Appointment.md)
+ - [AppointmentContact](docs/AppointmentContact.md)
+ - [AppointmentServiceContract](docs/AppointmentServiceContract.md)
+ - [AppointmentTech](docs/AppointmentTech.md)
  - [ArchivedProcess](docs/ArchivedProcess.md)
  - [Attachment](docs/Attachment.md)
  - [ClientContract](docs/ClientContract.md)
@@ -198,6 +206,7 @@ Class | Method | HTTP request | Description
  - [EligibilityResultPriceListItemsGroups](docs/EligibilityResultPriceListItemsGroups.md)
  - [FastOrder](docs/FastOrder.md)
  - [GetApiTokens200Response](docs/GetApiTokens200Response.md)
+ - [GetAppointments200Response](docs/GetAppointments200Response.md)
  - [GetClientLegalEntities200Response](docs/GetClientLegalEntities200Response.md)
  - [GetClientLegalEntities200ResponsePagination](docs/GetClientLegalEntities200ResponsePagination.md)
  - [GetCommercialOffers200Response](docs/GetCommercialOffers200Response.md)

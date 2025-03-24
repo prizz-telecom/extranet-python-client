@@ -18,23 +18,38 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from prizz_extranet.models.user import User
+from prizz_extranet.models.appointment_contact import AppointmentContact
+from prizz_extranet.models.appointment_service_contract import AppointmentServiceContract
+from prizz_extranet.models.appointment_tech import AppointmentTech
 from typing import Optional, Set
 from typing_extensions import Self
 
-class UserRole(BaseModel):
+class Appointment(BaseModel):
     """
-    UserRole
+    Appointment
     """ # noqa: E501
     available_workflows: Optional[List[StrictStr]] = Field(default=None, description="liste des processus disponible pour l'objet", alias="availableWorkflows")
     id: Optional[StrictInt] = None
+    name: Optional[StrictStr] = None
     create_date: Optional[datetime] = Field(default=None, alias="createDate")
     last_modified_date: Optional[datetime] = Field(default=None, alias="lastModifiedDate")
-    user: Optional[User] = None
-    role: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["availableWorkflows", "id", "createDate", "lastModifiedDate", "user", "role"]
+    house_number: Optional[StrictInt] = Field(default=None, alias="houseNumber")
+    house_number_complement: Optional[StrictStr] = Field(default=None, alias="houseNumberComplement")
+    street_name: Optional[StrictStr] = Field(default=None, alias="streetName")
+    postal_code: Optional[StrictStr] = Field(default=None, alias="postalCode")
+    city_name: Optional[StrictStr] = Field(default=None, alias="cityName")
+    insee_code: Optional[StrictStr] = Field(default=None, alias="inseeCode")
+    service_contract: Optional[AppointmentServiceContract] = Field(default=None, alias="serviceContract")
+    contact: Optional[AppointmentContact] = None
+    tech: Optional[AppointmentTech] = None
+    var_date: Optional[datetime] = Field(default=None, alias="date")
+    accepted: Optional[StrictBool] = None
+    status: Optional[StrictStr] = None
+    type: Optional[StrictStr] = None
+    confirmation_process_id: Optional[StrictInt] = Field(default=None, alias="confirmationProcessId")
+    __properties: ClassVar[List[str]] = ["availableWorkflows", "id", "name", "createDate", "lastModifiedDate", "houseNumber", "houseNumberComplement", "streetName", "postalCode", "cityName", "inseeCode", "serviceContract", "contact", "tech", "date", "accepted", "status", "type", "confirmationProcessId"]
 
     @field_validator('available_workflows')
     def available_workflows_validate_enum(cls, value):
@@ -45,6 +60,26 @@ class UserRole(BaseModel):
         for i in value:
             if i not in set(['Infracorp\\Services\\Workflow\\ClientLegalEntity\\CreateCommercialOffer\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Submit\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Sign\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Rename\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AddSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RemoveSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RenameSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateOfferItemInOffer\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\SetOffer\\Context', 'Infracorp\\Services\\Workflow\\Comment\\AddComment\\Context', 'Infracorp\\Services\\Workflow\\Comment\\SubscribeThread\\Context', 'Infracorp\\Services\\Workflow\\Comment\\UpdateComment\\Context', 'Infracorp\\Services\\Workflow\\Comment\\UpdateThread\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\Invoice\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\Users\\CreateToken\\Context', 'Infracorp\\Services\\Workflow\\Users\\RevokeToken\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateSubscribers\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AddItem\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RemoveItem\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateSectionItems\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AddContact\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntityContact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\Contact\\Update\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\UpdateDescription\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\UpdateClientRef\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\Activation\\SetupL2\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateClientRefSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\Contact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Contact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\Users\\SwitchActiveRole\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AddUserRole\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\ChangeContact\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerCancel\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerChangeDate\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerConfirm\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\MigrateCoaxToL2Premium\\Context']):
                 raise ValueError("each list item must be one of ('Infracorp\\Services\\Workflow\\ClientLegalEntity\\CreateCommercialOffer\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Submit\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Sign\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Rename\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AddSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RemoveSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RenameSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateOfferItemInOffer\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\SetOffer\\Context', 'Infracorp\\Services\\Workflow\\Comment\\AddComment\\Context', 'Infracorp\\Services\\Workflow\\Comment\\SubscribeThread\\Context', 'Infracorp\\Services\\Workflow\\Comment\\UpdateComment\\Context', 'Infracorp\\Services\\Workflow\\Comment\\UpdateThread\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\Invoice\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\CreateCommentThread\\Context', 'Infracorp\\Services\\Workflow\\Users\\CreateToken\\Context', 'Infracorp\\Services\\Workflow\\Users\\RevokeToken\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateSubscribers\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AddItem\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\RemoveItem\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateSectionItems\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AddContact\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntityContact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\Contact\\Update\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\UpdateDescription\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\UpdateClientRef\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\Activation\\SetupL2\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\UpdateClientRefSection\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\AssignContact\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\Contact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\CommercialOffer\\Contact\\SwitchActive\\Context', 'Infracorp\\Services\\Workflow\\Users\\SwitchActiveRole\\Context', 'Infracorp\\Services\\Workflow\\ClientLegalEntity\\AddUserRole\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\ChangeContact\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerCancel\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerChangeDate\\Context', 'Infracorp\\Services\\Workflow\\Appointment\\CustomerConfirm\\Context', 'Infracorp\\Services\\Workflow\\ServiceContract\\MigrateCoaxToL2Premium\\Context')")
+        return value
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['to_plan', 'need_confirm', 'planned', 'canceled', 'missing_custromer', 'missing_technician', 'terminated']):
+            raise ValueError("must be one of enum values ('to_plan', 'need_confirm', 'planned', 'canceled', 'missing_custromer', 'missing_technician', 'terminated')")
+        return value
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['technical_tour', 'connection_with_activation', 'connection_without_activation', 'other']):
+            raise ValueError("must be one of enum values ('technical_tour', 'connection_with_activation', 'connection_without_activation', 'other')")
         return value
 
     model_config = ConfigDict(
@@ -65,7 +100,7 @@ class UserRole(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UserRole from a JSON string"""
+        """Create an instance of Appointment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -86,24 +121,90 @@ class UserRole(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of user
-        if self.user:
-            _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of service_contract
+        if self.service_contract:
+            _dict['serviceContract'] = self.service_contract.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of contact
+        if self.contact:
+            _dict['contact'] = self.contact.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of tech
+        if self.tech:
+            _dict['tech'] = self.tech.to_dict()
         # set to None if last_modified_date (nullable) is None
         # and model_fields_set contains the field
         if self.last_modified_date is None and "last_modified_date" in self.model_fields_set:
             _dict['lastModifiedDate'] = None
 
-        # set to None if role (nullable) is None
+        # set to None if house_number (nullable) is None
         # and model_fields_set contains the field
-        if self.role is None and "role" in self.model_fields_set:
-            _dict['role'] = None
+        if self.house_number is None and "house_number" in self.model_fields_set:
+            _dict['houseNumber'] = None
+
+        # set to None if house_number_complement (nullable) is None
+        # and model_fields_set contains the field
+        if self.house_number_complement is None and "house_number_complement" in self.model_fields_set:
+            _dict['houseNumberComplement'] = None
+
+        # set to None if street_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.street_name is None and "street_name" in self.model_fields_set:
+            _dict['streetName'] = None
+
+        # set to None if postal_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.postal_code is None and "postal_code" in self.model_fields_set:
+            _dict['postalCode'] = None
+
+        # set to None if city_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.city_name is None and "city_name" in self.model_fields_set:
+            _dict['cityName'] = None
+
+        # set to None if insee_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.insee_code is None and "insee_code" in self.model_fields_set:
+            _dict['inseeCode'] = None
+
+        # set to None if service_contract (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_contract is None and "service_contract" in self.model_fields_set:
+            _dict['serviceContract'] = None
+
+        # set to None if contact (nullable) is None
+        # and model_fields_set contains the field
+        if self.contact is None and "contact" in self.model_fields_set:
+            _dict['contact'] = None
+
+        # set to None if tech (nullable) is None
+        # and model_fields_set contains the field
+        if self.tech is None and "tech" in self.model_fields_set:
+            _dict['tech'] = None
+
+        # set to None if var_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_date is None and "var_date" in self.model_fields_set:
+            _dict['date'] = None
+
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
+        # set to None if type (nullable) is None
+        # and model_fields_set contains the field
+        if self.type is None and "type" in self.model_fields_set:
+            _dict['type'] = None
+
+        # set to None if confirmation_process_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.confirmation_process_id is None and "confirmation_process_id" in self.model_fields_set:
+            _dict['confirmationProcessId'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UserRole from a dict"""
+        """Create an instance of Appointment from a dict"""
         if obj is None:
             return None
 
@@ -113,10 +214,23 @@ class UserRole(BaseModel):
         _obj = cls.model_validate({
             "availableWorkflows": obj.get("availableWorkflows"),
             "id": obj.get("id"),
+            "name": obj.get("name"),
             "createDate": obj.get("createDate"),
             "lastModifiedDate": obj.get("lastModifiedDate"),
-            "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "role": obj.get("role")
+            "houseNumber": obj.get("houseNumber"),
+            "houseNumberComplement": obj.get("houseNumberComplement"),
+            "streetName": obj.get("streetName"),
+            "postalCode": obj.get("postalCode"),
+            "cityName": obj.get("cityName"),
+            "inseeCode": obj.get("inseeCode"),
+            "serviceContract": AppointmentServiceContract.from_dict(obj["serviceContract"]) if obj.get("serviceContract") is not None else None,
+            "contact": AppointmentContact.from_dict(obj["contact"]) if obj.get("contact") is not None else None,
+            "tech": AppointmentTech.from_dict(obj["tech"]) if obj.get("tech") is not None else None,
+            "date": obj.get("date"),
+            "accepted": obj.get("accepted"),
+            "status": obj.get("status"),
+            "type": obj.get("type"),
+            "confirmationProcessId": obj.get("confirmationProcessId")
         })
         return _obj
 

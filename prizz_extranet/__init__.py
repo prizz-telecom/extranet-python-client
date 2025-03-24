@@ -31,7 +31,12 @@ from prizz_extranet.exceptions import ApiAttributeError
 from prizz_extranet.exceptions import ApiException
 
 # import models into sdk package
+from prizz_extranet.models.add_commercial_offer_comment import AddCommercialOfferComment
 from prizz_extranet.models.add_service_contract_comment import AddServiceContractComment
+from prizz_extranet.models.appointment import Appointment
+from prizz_extranet.models.appointment_contact import AppointmentContact
+from prizz_extranet.models.appointment_service_contract import AppointmentServiceContract
+from prizz_extranet.models.appointment_tech import AppointmentTech
 from prizz_extranet.models.archived_process import ArchivedProcess
 from prizz_extranet.models.attachment import Attachment
 from prizz_extranet.models.client_contract import ClientContract
@@ -63,6 +68,7 @@ from prizz_extranet.models.eligibility_result_combination import EligibilityResu
 from prizz_extranet.models.eligibility_result_price_list_items_groups import EligibilityResultPriceListItemsGroups
 from prizz_extranet.models.fast_order import FastOrder
 from prizz_extranet.models.get_api_tokens200_response import GetApiTokens200Response
+from prizz_extranet.models.get_appointments200_response import GetAppointments200Response
 from prizz_extranet.models.get_client_legal_entities200_response import GetClientLegalEntities200Response
 from prizz_extranet.models.get_client_legal_entities200_response_pagination import GetClientLegalEntities200ResponsePagination
 from prizz_extranet.models.get_commercial_offers200_response import GetCommercialOffers200Response

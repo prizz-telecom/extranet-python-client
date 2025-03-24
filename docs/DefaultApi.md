@@ -4,6 +4,7 @@ All URIs are relative to *https://my.tests.prizz-telecom.fr*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_commercial_offer_comment**](DefaultApi.md#add_commercial_offer_comment) | **POST** /external-api/v2/commercial_offers/{id}/comments | Commercial offer add comment
 [**add_service_contract_comment**](DefaultApi.md#add_service_contract_comment) | **POST** /external-api/v2/service_contracts/{id}/comments | Service Contract add comment
 [**create_commercial_offer**](DefaultApi.md#create_commercial_offer) | **POST** /external-api/v2/commercial_offers | Commercial Offers
 [**create_commercial_offer_section**](DefaultApi.md#create_commercial_offer_section) | **POST** /external-api/v2/commercial_offers/{id}/sections | Commercial Offer Sections
@@ -13,6 +14,8 @@ Method | HTTP request | Description
 [**eligibility_history**](DefaultApi.md#eligibility_history) | **GET** /external-api/v2/eligibility/history | Eligibility History
 [**fast_order**](DefaultApi.md#fast_order) | **POST** /external-api/v2/commercial_offers/fast_order/{elig_ctx_id} | Fast order with eligiblity result
 [**get_api_tokens**](DefaultApi.md#get_api_tokens) | **GET** /external-api/v2/users/api_tokens | User Api Tokens
+[**get_appointment**](DefaultApi.md#get_appointment) | **GET** /external-api/v2/appointments/{id} | Appointment
+[**get_appointments**](DefaultApi.md#get_appointments) | **GET** /external-api/v2/appointments | Appointments
 [**get_attachment**](DefaultApi.md#get_attachment) | **GET** /external-api/v2/attachments/{id} | Attachment
 [**get_client_legal_entities**](DefaultApi.md#get_client_legal_entities) | **GET** /external-api/v2/client_legal_entities | Client legal entities
 [**get_client_legal_entity**](DefaultApi.md#get_client_legal_entity) | **GET** /external-api/v2/client_legal_entities/{id} | Client legal entity
@@ -66,6 +69,98 @@ Method | HTTP request | Description
 [**submit_commercial_offer**](DefaultApi.md#submit_commercial_offer) | **POST** /external-api/v2/commercial_offers/{id}/submit | Submit Commercial Offer
 [**update_commercial_offer_section_items**](DefaultApi.md#update_commercial_offer_section_items) | **POST** /external-api/v2/commercial_offers/{id}/sections/{sectionId}/update_items | Update Commercial Offer Section Items
 
+
+# **add_commercial_offer_comment**
+> CreateCommercialOffer201Response add_commercial_offer_comment(id, add_commercial_offer_comment=add_commercial_offer_comment)
+
+Commercial offer add comment
+
+Add commercial offer comment
+
+### Example
+
+* Api Key Authentication (tokenAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import prizz_extranet
+from prizz_extranet.models.add_commercial_offer_comment import AddCommercialOfferComment
+from prizz_extranet.models.create_commercial_offer201_response import CreateCommercialOffer201Response
+from prizz_extranet.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://my.tests.prizz-telecom.fr
+# See configuration.py for a list of all supported configuration parameters.
+configuration = prizz_extranet.Configuration(
+    host = "https://my.tests.prizz-telecom.fr"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: tokenAuth
+configuration.api_key['tokenAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['tokenAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = prizz_extranet.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with prizz_extranet.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = prizz_extranet.DefaultApi(api_client)
+    id = 56 # int | commercial offer identifier
+    add_commercial_offer_comment = prizz_extranet.AddCommercialOfferComment() # AddCommercialOfferComment |  (optional)
+
+    try:
+        # Commercial offer add comment
+        api_response = api_instance.add_commercial_offer_comment(id, add_commercial_offer_comment=add_commercial_offer_comment)
+        print("The response of DefaultApi->add_commercial_offer_comment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->add_commercial_offer_comment: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| commercial offer identifier | 
+ **add_commercial_offer_comment** | [**AddCommercialOfferComment**](AddCommercialOfferComment.md)|  | [optional] 
+
+### Return type
+
+[**CreateCommercialOffer201Response**](CreateCommercialOffer201Response.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | comment added |  -  |
+**400** | bad request |  -  |
+**401** | need authentication |  -  |
+**403** | forbidden |  -  |
+**404** | resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_service_contract_comment**
 > CreateCommercialOffer201Response add_service_contract_comment(id, add_service_contract_comment=add_service_contract_comment)
@@ -880,6 +975,176 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | liste des clés d&#39;api de l&#39;utilisateur |  -  |
 **401** | need authentication |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_appointment**
+> Appointment get_appointment(id)
+
+Appointment
+
+get appointment
+
+### Example
+
+* Api Key Authentication (tokenAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import prizz_extranet
+from prizz_extranet.models.appointment import Appointment
+from prizz_extranet.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://my.tests.prizz-telecom.fr
+# See configuration.py for a list of all supported configuration parameters.
+configuration = prizz_extranet.Configuration(
+    host = "https://my.tests.prizz-telecom.fr"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: tokenAuth
+configuration.api_key['tokenAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['tokenAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = prizz_extranet.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with prizz_extranet.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = prizz_extranet.DefaultApi(api_client)
+    id = 56 # int | id
+
+    try:
+        # Appointment
+        api_response = api_instance.get_appointment(id)
+        print("The response of DefaultApi->get_appointment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_appointment: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| id | 
+
+### Return type
+
+[**Appointment**](Appointment.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | photos |  -  |
+**401** | need authentication |  -  |
+**404** | resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_appointments**
+> GetAppointments200Response get_appointments()
+
+Appointments
+
+get appointments
+
+### Example
+
+* Api Key Authentication (tokenAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import prizz_extranet
+from prizz_extranet.models.get_appointments200_response import GetAppointments200Response
+from prizz_extranet.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://my.tests.prizz-telecom.fr
+# See configuration.py for a list of all supported configuration parameters.
+configuration = prizz_extranet.Configuration(
+    host = "https://my.tests.prizz-telecom.fr"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: tokenAuth
+configuration.api_key['tokenAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['tokenAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = prizz_extranet.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with prizz_extranet.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = prizz_extranet.DefaultApi(api_client)
+
+    try:
+        # Appointments
+        api_response = api_instance.get_appointments()
+        print("The response of DefaultApi->get_appointments:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_appointments: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAppointments200Response**](GetAppointments200Response.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | appointments |  -  |
+**401** | need authentication |  -  |
+**404** | resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
